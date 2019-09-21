@@ -1,6 +1,6 @@
 {
   "name": "dicebox",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "build tool for typescript based RPG Maker MV plugins",
   "repository": "https://github.com/illBeRoy/dicebox.git",
   "keywords": [
@@ -24,7 +24,7 @@
     "test": "jest",
     "start": "node .",
     "prepublishOnly": "npm run build",
-    "build": "npm run build:typescript && build:rmmv",
+    "build": "npm run build:typescript && npm run build:rmmv",
     "build:typescript": "tsc",
     "build:rmmv": "cat types/*.d.ts > boilerplate/rmmv.d.ts",
     "watch": "npm run watch:typescript",
@@ -40,11 +40,8 @@
     "@types/node": "^12.7.5",
     "@types/prompts": "^2.0.1",
     "@types/shelljs": "^0.8.5",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
     "tslint": "^5.20.0",
-    "tslint-eslint-rules": "^5.4.0",
-    "typescript": "^3.6.3"
+    "tslint-eslint-rules": "^5.4.0"
   },
   "dependencies": {
     "argparse": "^1.0.10",
@@ -52,6 +49,7 @@
     "lodash.kebabcase": "^4.1.1",
     "prompts": "^2.2.1",
     "shelljs": "^0.8.3",
-    "ts-node": "^8.4.1"
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
   }
 }
