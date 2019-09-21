@@ -13,12 +13,12 @@ interface BuildOpts {
 export function build({ file, outDir }: BuildOpts) {
   const pluginConf = loadConfig();
   const outFile = path.join(outDir, `${pluginConf.pluginFilename}.js`);
-  bundle(file, outFile);
+  bundle(file, outDir, outFile);
   addDocCommentsToFile(outFile, pluginConf);
 }
 
-const bundle = (inFile: string, outFile: string) => {
-  shellJs.exec(`npx parcel build ${inFile} --out-file ${outFile} --no-source-maps`);
+const bundle = (inFile: string, outDir: string, outFile: string) => {
+  shellJs.exec(`npx parcel build ${inFile} --out-dir ${outDir} --out-file ${outFile} --no-source-maps`);
 };
 
 const addDocCommentsToFile = (file: string, conf: PluginConf) => {
