@@ -1,0 +1,15 @@
+import { PluginConf } from 'dicebox/conf';
+
+export const config: PluginConf = {
+  name: '<%= projectName %>',
+  author: '<%= projectAuthor %>',
+  pluginFilename: '<%= pluginFilename %>',
+  description: '<%= pluginDescription %>',
+  parameters: [
+    {
+      name: 'Some Parameter',
+      description: 'This is an example parameter. Try modifying this or adding new ones!',
+      default: 'Hello, World!'
+    }
+  ]
+};

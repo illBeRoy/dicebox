@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "sourceMap": false,
+    "removeComments": false,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "moduleResolution": "node",
+    "jsx": "react"
+  },
+  "include": [
+    "src",
+    "rmmv.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
