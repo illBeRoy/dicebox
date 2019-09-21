@@ -201,4 +201,3 @@ build
 .cache
 .vscode
 .idea
-boilerplate/rmmv.d.ts

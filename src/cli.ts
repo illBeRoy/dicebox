@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import { ArgumentParser } from 'argparse';
-import { build } from './build';
 import { init } from './init';
+import { build } from './build';
+import { watch } from './watch';
 
 async function main() {
   const argparser = new ArgumentParser();
@@ -20,6 +21,17 @@ async function main() {
     defaultValue: 'src/index.ts'
   });
 
+  const watchCmd = command.addParser('watch', { description: 'watch and continuously build plugin file in project directory' });
+  watchCmd.addArgument(['-o', '--out-dir'], {
+    help: 'output directory to put the generated files in',
+    defaultValue: 'dist'
+  });
+
+  watchCmd.addArgument('file', {
+    help: 'entry point file',
+    defaultValue: 'src/index.ts'
+  });
+
   const args = argparser.parseArgs();
 
   switch (args.command) {
@@ -30,6 +42,15 @@ async function main() {
 
     case 'build': {
       await build({
+        file: args.file,
+        outDir: args.out_dir
+      });
+
+      break;
+    }
+
+    case 'watch': {
+      await watch({
         file: args.file,
         outDir: args.out_dir
       });
