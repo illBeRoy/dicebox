@@ -1,6 +1,6 @@
 {
   "name": "dicebox",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "build tool for typescript based RPG Maker MV plugins",
   "repository": "https://github.com/illBeRoy/dicebox.git",
   "keywords": [
