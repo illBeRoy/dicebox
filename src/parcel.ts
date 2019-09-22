@@ -1,31 +1,27 @@
 import * as Bundler from 'parcel-bundler';
+import * as fs from 'fs';
 import { PluginConf } from './types';
 import { createDocsForPlugin } from './docs';
 
 export function createParcelBundlerForProject(inputFiles: string[], outDir: string, pluginConf: PluginConf, { watch = false } = {}) {
   const outFile = `${pluginConf.pluginFilename}.js`;
-
-  class RMMVDocsPackager extends Bundler.Packager {
-    readonly dest: any;
-
-    async start() {
-      const pluginDocs = createDocsForPlugin(pluginConf);
-      await this.dest.write(`${pluginDocs}\n`);
-    }
-
-    async addAsset(asset) {
-      await this.dest.write(asset.generated.js);
-    }
-  }
+  const pluginDocs = createDocsForPlugin(pluginConf);
 
   const bundler = new Bundler(inputFiles, {
     outDir,
     outFile,
     watch,
+    minify: true,
+    hmr: false,
     sourceMaps: false
   });
 
-  bundler.addPackager('js', RMMVDocsPackager);
+  bundler.on('bundled', bundle => {
+    const bundles = Array.from<any>(bundle.childBundles).concat([bundle]);
+    const jsBundle = bundles.find(bundle => bundle.entryAsset && bundle.entryAsset.type === 'js');
+    const jsCode = fs.readFileSync(jsBundle.name);
+    fs.writeFileSync(jsBundle.name, `${pluginDocs}\n${jsCode}`);
+  });
 
   return bundler;
 }
